@@ -39,7 +39,7 @@
    */
   const scrollto = (el) => {
     window.scrollTo({
-      top: 0,
+      top:0,
       behavior: 'smooth'
     })
   }
@@ -80,7 +80,7 @@
       }
 
       if (this.hash == '#header') {
-        header.classList.remove('header-top')
+         header.classList.remove('header-top')
         sections.forEach((item) => {
           item.classList.remove('section-show')
         })

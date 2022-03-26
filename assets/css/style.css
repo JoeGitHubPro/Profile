@@ -285,16 +285,7 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
-section {
-  overflow: hidden;
-  position: absolute;
-  width: 100%;
-  top: 140px;
-  bottom: 100%;
-  opacity: 0;
-  transition: ease-in-out 0.4s;
-  z-index: 2;
-}
+
 section.section-show {
   top: 100px;
   bottom: auto;
@@ -362,6 +353,7 @@ section .container {
 }
 .about-me .content ul strong {
   margin-right: 10px;
+  
 }
 .about-me .content ul i {
   font-size: 16px;
@@ -439,7 +431,7 @@ section .container {
 .skills .progress-bar {
   width: 1px;
   height: 10px;
-  transition: 0.9s;
+  transition: 0.7s;
   background-color: #18d26e;
 }
 
