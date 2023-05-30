@@ -9,6 +9,18 @@
 # General
 
 --------------------------------------------------------------*/
+.my-list {
+  margin-left: 0px;
+  padding-left: 0px;
+  color: #18d26e;
+
+}
+.my-list li {
+  font-weight: bold;
+}
+
+
+
 #You{
 display:inline-block; 
 }
