@@ -183,33 +183,74 @@
     }
   });
 
-  /**
-   * Porfolio isotope and filter
-   */
-  window.addEventListener('load', () => {
-    let portfolioContainer = select('.portfolio-container');
-    if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: '.portfolio-item',
-        layoutMode: 'fitRows'
-      });
+    /**
+    * Portfolio isotope and filter
+    */
+    window.addEventListener('load', () => {
+        let portfolioContainer = document.querySelector('.portfolio-container');
+        if (portfolioContainer) {
+            let portfolioIsotope = new Isotope(portfolioContainer, {
+                itemSelector: '.portfolio-item',
+                layoutMode: 'fitRows'
+            });
 
-      let portfolioFilters = select('#portfolio-flters li', true);
+            let mainFilters = document.querySelectorAll('#main-flters li');
+            let subFilters = document.querySelectorAll('#portfolio-flters li');
 
-      on('click', '#portfolio-flters li', function(e) {
-        e.preventDefault();
-        portfolioFilters.forEach(function(el) {
-          el.classList.remove('filter-active');
-        });
-        this.classList.add('filter-active');
+            function applyFilters() {
+                // Get active main filter
+                let activeMainFilter = document.querySelector('#main-flters .filter-active');
+                let mainFilterValue = activeMainFilter ? activeMainFilter.getAttribute('data-filter') : '*';
 
-        portfolioIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-      }, true);
-    }
+                // Get active sub filter
+                let activeSubFilter = document.querySelector('#portfolio-flters .filter-active');
+                let subFilterValue = activeSubFilter ? activeSubFilter.getAttribute('data-filter') : '';
 
-  });
+                // Construct the combined filter
+                let combinedFilter = mainFilterValue + subFilterValue;
+
+                // Apply the filter to Isotope
+                portfolioIsotope.arrange({
+                    filter: combinedFilter
+                });
+            }
+
+            // Main filter click event
+            mainFilters.forEach(filter => {
+                filter.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    mainFilters.forEach(el => el.classList.remove('filter-active'));
+                    this.classList.add('filter-active');
+                    applyFilters();
+                });
+            });
+
+            // Sub filter click event
+            subFilters.forEach(filter => {
+                filter.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Check if the clicked filter is already active
+                    if (this.classList.contains('filter-active')) {
+                        // If it is active, remove the 'filter-active' class
+                        this.classList.remove('filter-active');
+                    } else {
+                        // Otherwise, deactivate all filters and activate the clicked one
+                        subFilters.forEach(el => el.classList.remove('filter-active'));
+                        this.classList.add('filter-active');
+                    }
+
+                    // Apply filters after updating the classes
+                    applyFilters();
+                });
+            });
+
+
+            // Initial filter application
+            applyFilters();
+        }
+    });
+
 
   /**
    * Initiate portfolio lightbox 
