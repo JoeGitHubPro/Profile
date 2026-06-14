@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: '/youssef-mohamed-ali-portfolio/', // 👈 Add this line
+    base: '/Profile/', // 👈 Add this line
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
